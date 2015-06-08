@@ -19,29 +19,34 @@ public class CSVReader {
 
     public List<Map<String, String>> readCSV(String csvFile) throws IOException {
 
-        CsvListReader csvReader = new CsvListReader(new BufferedReader(new FileReader(csvFile)), CsvPreference.STANDARD_PREFERENCE);
+        try {
 
-        //Read CSV Header
-        List<String> header = new ArrayList<>(csvReader.read());
-        List<String> rowAsTokens;
+            CsvListReader csvReader = new CsvListReader(new BufferedReader(new FileReader(csvFile)), CsvPreference.STANDARD_PREFERENCE);
 
-        //Read the CSV as List of Maps where each Map represents row data
-        List<Map<String, String>> rows = new ArrayList<>();
-        Map<String, String> row;
+            //Read CSV Header
+            List<String> header = new ArrayList<>(csvReader.read());
+            List<String> rowAsTokens;
 
-        while ((rowAsTokens = csvReader.read()) != null) {
+            //Read the CSV as List of Maps where each Map represents row data
+            List<Map<String, String>> rows = new ArrayList<>();
+            Map<String, String> row;
 
-            //Create Map for each row in CSV
-            row = new HashMap<>();
+            while ((rowAsTokens = csvReader.read()) != null) {
 
-            for (int i = 0; i < header.size(); i++) {
-                row.put(header.get(i), rowAsTokens.get(i));
+                //Create Map for each row in CSV
+                row = new HashMap<>();
+
+                for (int i = 0; i < header.size(); i++) {
+                    row.put(header.get(i), rowAsTokens.get(i));
+                }
+
+                //add Row map to list of rows
+                rows.add(row);
             }
-
-            //add Row map to list of rows
-            rows.add(row);
+            return rows;
+        } catch (Exception IOException) {
+            throw new IOException("Error reading csv file. Please check the file supplied");
         }
-        return rows;
 
     }
 }
