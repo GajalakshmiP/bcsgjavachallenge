@@ -1,0 +1,7 @@
+This ia simple maven project which uses SuperCsv to read data from CSV file.
+
+The project is developed using TDD.
+
+The main class JavaChallenge requires the location of the csv file as an argument.
+
+The result is printed on the console.
