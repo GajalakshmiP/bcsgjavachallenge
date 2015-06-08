@@ -9,6 +9,7 @@ import java.util.Map;
 public class JavaChallenge {
 
     public static void main(String[] args) throws IOException {
+        checkInputFile(args);
 
         //Read data from the supplied CSV file
         List<Map<String, String>> csvData = readCsv(args[0]);
@@ -22,6 +23,14 @@ public class JavaChallenge {
 
         //Print the result
         printOutput(maskedList);
+    }
+
+    private static void checkInputFile(String[] args) {
+        if (args.length == 0) {
+            System.out.println("Proper Usage is: csv location and filename.");
+            System.exit(0);
+        }
+
     }
 
     private static List<Map<String, String>> readCsv(String csvFile) throws IOException {
